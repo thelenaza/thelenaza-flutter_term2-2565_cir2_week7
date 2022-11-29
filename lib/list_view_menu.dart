@@ -1,5 +1,16 @@
 import 'package:flutter/material.dart';
 
+class ListMenu {
+  final String? title;
+  final String? subtitle;
+  final IconData? icon;
+  const ListMenu({this.title, this.subtitle, this.icon});
+}
+
+List<ListMenu> menus = [
+  const ListMenu(title: 'MENU-1', subtitle: 'SUB-1', icon: Icons.person),
+];
+
 class ListViewMenuPage extends StatelessWidget {
   const ListViewMenuPage({Key? key}) : super(key: key);
 
@@ -12,20 +23,19 @@ class ListViewMenuPage extends StatelessWidget {
       ),
       body: Container(
         child: ListView.separated(
-          itemCount: 4,
-          separatorBuilder: (_,index){
+          itemCount: menus.length,
+          separatorBuilder: (_, index) {
             return Divider(color: Colors.red);
           },
-          itemBuilder: (context,index){
+          itemBuilder: (context, index) {
             return ListTile(
-                title: Text('Menu-1'),
-                subtitle: Text('SUB-1'),
-                leading: CircleAvatar(child: Icon(Icons.person)),
+                title: Text('${menus[index].title}'),
+                subtitle: Text('${menus[index].subtitle}'),
+                leading: CircleAvatar(child: Icon(menus[index].icon)),
                 trailing: Icon(Icons.arrow_right),
                 onTap: () {
                   debugPrint('MENU-1');
-                }
-            );
+                });
           },
         ),
       ),
